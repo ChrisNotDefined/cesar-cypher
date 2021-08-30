@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/cesar-cypher/static/css/main.8965825e.chunk.css",
+    "main.js": "/cesar-cypher/static/js/main.f58cbb58.chunk.js",
+    "main.js.map": "/cesar-cypher/static/js/main.f58cbb58.chunk.js.map",
+    "runtime-main.js": "/cesar-cypher/static/js/runtime-main.8d686861.js",
+    "runtime-main.js.map": "/cesar-cypher/static/js/runtime-main.8d686861.js.map",
+    "static/js/2.6e0a3549.chunk.js": "/cesar-cypher/static/js/2.6e0a3549.chunk.js",
+    "static/js/2.6e0a3549.chunk.js.map": "/cesar-cypher/static/js/2.6e0a3549.chunk.js.map",
+    "static/js/3.885de3c6.chunk.js": "/cesar-cypher/static/js/3.885de3c6.chunk.js",
+    "static/js/3.885de3c6.chunk.js.map": "/cesar-cypher/static/js/3.885de3c6.chunk.js.map",
+    "index.html": "/cesar-cypher/index.html",
+    "static/css/main.8965825e.chunk.css.map": "/cesar-cypher/static/css/main.8965825e.chunk.css.map",
+    "static/js/2.6e0a3549.chunk.js.LICENSE.txt": "/cesar-cypher/static/js/2.6e0a3549.chunk.js.LICENSE.txt",
+    "static/media/swap.15f6a911.svg": "/cesar-cypher/static/media/swap.15f6a911.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8d686861.js",
+    "static/js/2.6e0a3549.chunk.js",
+    "static/css/main.8965825e.chunk.css",
+    "static/js/main.f58cbb58.chunk.js"
+  ]
+}
