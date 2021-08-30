@@ -22,15 +22,11 @@ export default function MainPage() {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    const force = () => {
-      setOffset((off) => (off + 1) % 26);
-    };
-
     if (forcing) {
-      force();
+      translateOffset();
       bfInterval.current = setInterval(() => {
-        force();
-      }, 250);
+        translateOffset();
+      }, 300);
     } else {
       clearInterval(bfInterval.current);
     }
@@ -45,6 +41,10 @@ export default function MainPage() {
 
   const toggleDecrypt = () => {
     setDecryptMode((val) => !val);
+  };
+
+  const translateOffset = (ammount = 1) => {
+    setOffset((off) => (26 + off + ammount) % 26);
   };
 
   const encrypt = () => {
@@ -75,7 +75,9 @@ export default function MainPage() {
           TextComponent={TextArea}
         />
         <Actions>
+          <Button onClick={() => translateOffset()}>+</Button>
           Offset: {offset}
+          <Button onClick={() => translateOffset(-1)}>-</Button>
           <Button onClick={applyTransform}>
             {decryptMode ? "Decifrar" : "Cifrar"}
           </Button>
