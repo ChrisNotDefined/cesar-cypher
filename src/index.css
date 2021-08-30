@@ -5,6 +5,9 @@
   --accentColor: hsl(42, 80%, 50%);
   --accentLighter: hsl(42, 80%, 60%);
   --accentDarker: hsl(42, 80%, 30%);
+  --dangerColor: hsl(0, 90%, 30%);
+  --dangerLighter: hsl(0, 90%, 60%);
+  --dangerDarker: hsl(0, 90%, 20%);
 }
 
 body {

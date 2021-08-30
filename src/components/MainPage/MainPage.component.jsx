@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Cesar } from "../../utils/cyphers/cesar-cyfer";
 import Button from "../Button";
+import DangerButton from "../DangerButton";
 import SwapButton from "../SwapButton/SwapButton.component";
 import TextWriter from "../TextWriter";
 
@@ -13,23 +14,55 @@ import {
 } from "./MainPage.styles";
 
 export default function MainPage() {
-  const [decrypt, setDecrypt] = useState(false);
+  const [decryptMode, setDecryptMode] = useState(false);
+  const [offset, setOffset] = useState(5);
   const [result, setResult] = useState("");
+  const [forcing, setForcing] = useState(false);
+  const bfInterval = useRef(null);
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    const force = () => {
+      setOffset((off) => (off + 1) % 26);
+    };
+
+    if (forcing) {
+      force();
+      bfInterval.current = setInterval(() => {
+        force();
+      }, 250);
+    } else {
+      clearInterval(bfInterval.current);
+    }
+  }, [forcing]);
+
+  useEffect(() => {
+    if (forcing) {
+      const decrypted = Cesar.decrypt(inputRef.current?.value, offset);
+      setResult(decrypted);
+    }
+  }, [offset, forcing]);
+
   const toggleDecrypt = () => {
-    setDecrypt((val) => !val);
+    setDecryptMode((val) => !val);
+  };
+
+  const encrypt = () => {
+    const encryptedMessage = Cesar.encrypt(inputRef.current?.value, offset);
+    setResult(encryptedMessage);
+  };
+
+  const decrypt = () => {
+    const decrypted = Cesar.decrypt(inputRef.current?.value, offset);
+    setResult(decrypted);
   };
 
   const applyTransform = () => {
-    if (!decrypt) {
-      const encryptedMessage = Cesar.encrypt(inputRef.current?.value);
-      setResult(encryptedMessage);
+    if (!decryptMode) {
+      encrypt();
       return;
     }
-
-    const decrypted = Cesar.decrypt(inputRef.current?.value);
-    setResult(decrypted);
+    decrypt();
   };
 
   return (
@@ -42,10 +75,19 @@ export default function MainPage() {
           TextComponent={TextArea}
         />
         <Actions>
+          Offset: {offset}
           <Button onClick={applyTransform}>
-            {decrypt ? "Decifrar" : "Cifrar"}
+            {decryptMode ? "Decifrar" : "Cifrar"}
           </Button>
-          <SwapButton onClick={toggleDecrypt} active={decrypt} />
+          <SwapButton onClick={toggleDecrypt} active={decryptMode} />
+          {decryptMode && (
+            <DangerButton
+              onMouseDown={() => setForcing(true)}
+              onMouseUp={() => setForcing(false)}
+            >
+              Brute force
+            </DangerButton>
+          )}
         </Actions>
         <TextWriter
           width="100%"
